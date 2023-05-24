@@ -2,7 +2,7 @@ import sys
 import socket
 from threading import Thread
 
-server_ip, port = '192.168.207.50', 8080 #PUT YOU IP HERE
+server_ip, port = socket.gethostbyname(socket.gethostname()), 8080 #PUT YOU IP HERE
 ConnectList = []
 
 def SendMSG(connect):
