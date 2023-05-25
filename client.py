@@ -19,5 +19,4 @@ def main():
         client.send(msg.encode('utf-8'))
     client.getSocket().close()
     
-
 main()

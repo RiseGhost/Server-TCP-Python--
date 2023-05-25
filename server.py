@@ -2,17 +2,16 @@ import sys
 import socket
 from threading import Thread
 
-server_ip, port = socket.gethostbyname(socket.gethostname()), 8080 #PUT YOU IP HERE
+server_ip, port = '192.168.1.166', 8080 #PUT YOU IP HERE
 ConnectList = []
 
 def SendMSG(connect):
     try:
         data = connect.recv(1024)
-        msg = data.decode('utf-8')
         if (len(ConnectList) == 1): ConnectList[0].send(b"You are alone")
         else:
             for i in range(len(ConnectList)):
-                if (ConnectList[i] != connect): ConnectList[i].send(msg.encode('utf-8'))
+                if (ConnectList[i] != connect): ConnectList[i].send(data)
         SendMSG(connect)
     except:
         print("Err ❌\nProbably the client disconnected")
@@ -36,5 +35,4 @@ def main():
         thread = Thread(target=SendMSG, args=(connect,))
         thread.start()
     
-
-main()        
+main()
