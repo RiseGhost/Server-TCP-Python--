@@ -42,15 +42,25 @@ Ou seja para cada novo cliente que se conecta ao servidor um novo thread é cria
 Este projeto tem a capacidade de tratar alguns erros e exceptions que possam acontecer durante a execução do código como por exemplo:
 
 - Porta inválida:
+
 ![](https://user-images.githubusercontent.com/91985039/241816303-0e5165df-80ec-42e6-89eb-c030baa9b8d3.jpg)
+
 - Erro ao conectar com o servidor:
+
 ![](https://user-images.githubusercontent.com/91985039/241816304-01490968-9976-4a3e-93b2-3a89c7003865.jpg)
+
 - Você esta sozinho no servidor:
+
 ![](https://user-images.githubusercontent.com/91985039/241816308-6feda359-8866-4b4e-8aad-2e5f6801d3c2.jpg)
+
 - Conexão com o servidor perdida (client):
+
 ![](https://user-images.githubusercontent.com/91985039/241816310-03e27ce0-577b-470b-8610-adcb51c91da2.jpg)
+
 - Cliente desconectado (server):
+
 ![](https://user-images.githubusercontent.com/91985039/241816493-ef59e999-ac8f-4764-970e-88a454bc83c8.jpg)
+
 
 ## Code Problems ❌:
 Apesar de tudo o código apresenta algum problemas entre os quais:
