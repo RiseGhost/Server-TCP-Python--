@@ -7,7 +7,11 @@ def main():
     sys.stdout.write('\033[2J\033[H')
     sys.stdout.flush()
     #++++++++++++++++++++++
-    client = ClientConnect(input("🧊 Server IP   -> "), int(input("🚪 Server PORT -> ")))
+    try:
+        client = ClientConnect(input("🧊 Server IP   -> "), int(input("🚪 Server PORT -> ")))
+    except KeyboardInterrupt:
+        print("\n\nConnection terminated by user by use CRTL + C ❎\n")
+        exit()
     UserName = input("🤔 User Name   -> ")
     if (UserName != ""):    client.send(UserName)
     else:                   client.send("Null")
@@ -15,7 +19,7 @@ def main():
     rd = ReadChat(client.getSocket(), 1024, LastInteraction)
     
     while True:
-        if (LastInteraction == "Client"):   print("Write you mensage -> ", end="")
+        if (LastInteraction == "Client"):   print("-> ", end="")
         msg = input()
         LastInteraction = "Client"
         if msg == "exit": break

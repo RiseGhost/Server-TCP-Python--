@@ -17,9 +17,8 @@ class ReadChat(threading.Thread):
                 sys.stdin.flush()
                 self.ResponseNumber += 1
                 self.Interaction = "Server"
-                print("\033[K\r\033[0;32mServer response   -> \033[0m" 
-                      + server_response.decode('utf-8') 
-                      + "\nWrite you mensage -> ", end="")
+                print(server_response.decode('utf-8') + 
+                      "\n-> ", end="")
             except:     break
 
     def getResponseNumber(self):    return self.ResponseNumber
