@@ -51,4 +51,8 @@ def main():
             print("Server off in max 5.00s ⏱️")
             break
     
+    #Close connection with clients:
+    for SocketConnect in ConnectList:
+        SocketConnect.close()
+    
 main()
