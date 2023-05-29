@@ -1,5 +1,4 @@
-import sys
-import threading
+import sys, threading
 
 class ReadChat(threading.Thread):
     def __init__(self, serverconnect, ByteSize, Interaction):
@@ -22,7 +21,6 @@ class ReadChat(threading.Thread):
                       + server_response.decode('utf-8') 
                       + "\nWrite you mensage -> ", end="")
             except:     break
-            
 
     def getResponseNumber(self):    return self.ResponseNumber
     def getInteraction(self):       return self.Interaction

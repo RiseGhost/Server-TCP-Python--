@@ -8,6 +8,9 @@ def main():
     sys.stdout.flush()
     #++++++++++++++++++++++
     client = ClientConnect(input("🧊 Server IP   -> "), int(input("🚪 Server PORT -> ")))
+    UserName = input("🤔 User Name   -> ")
+    if (UserName != ""):    client.send(UserName)
+    else:                   client.send("Null")
     LastInteraction = "Client"
     rd = ReadChat(client.getSocket(), 1024, LastInteraction)
     
@@ -16,7 +19,7 @@ def main():
         msg = input()
         LastInteraction = "Client"
         if msg == "exit": break
-        client.send(msg.encode('utf-8'))
+        client.send(msg)
     client.getSocket().close()
     
 main()

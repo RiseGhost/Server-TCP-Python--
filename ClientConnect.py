@@ -12,4 +12,4 @@ class ClientConnect:
             exit()
     
     def getSocket(self):         return self.client_socket
-    def send(self, msg):         return self.client_socket.send(msg)
+    def send(self, msg):         return self.client_socket.send(msg.encode('utf-8'))
