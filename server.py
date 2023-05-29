@@ -1,17 +1,23 @@
-import sys, socket
+import socket, style, style
 from threading import Thread, Event
 
 server_ip, port = '192.168.1.166', 8080 #PUT YOU IP HERE
 MAXBYTES = 1024                         #1024 is the max msg bytes
 ConnectList = []
 
-def SendMSG(connect, Username):
+def CreateUserLabel(Username, UTheme, data):
+    return (UTheme[0] + UTheme[1] + " " + Username + style.ResetConsoleColor + " -> " + data.decode('utf-8'))
+
+def SendMSG(connect, Username, UserTheme):
     try:
         data = connect.recv(MAXBYTES)
         for SockectClient in ConnectList:
-            if (SockectClient != connect): SockectClient.send(Username + b" -> " + data)
+            try:
+                if (SockectClient != connect):      SockectClient.send(CreateUserLabel(Username, UserTheme, data).encode('utf-8'))
+            except Exception as e:
+                print(repr(e))
         if (len(ConnectList) == 1): ConnectList[0].send(b"\033[K\r\033[0;32mServer response   -> \033[0mYou are alone")
-        SendMSG(connect, Username)
+        SendMSG(connect, Username, UserTheme)
     except:
         print("Err ❌\nProbably the client disconnected")
         ConnectList.remove(connect)
@@ -23,7 +29,7 @@ def WaitForClients(server_socket, event):
             ConnectList.append(connect)
             UserName = connect.recv(MAXBYTES)
             print("Client connect 🔗 -> " + UserName.decode('utf-8'))
-            Thread(target=SendMSG, args=(connect, UserName, )).start() #Thread start, responsible for reading the messages from the clients and sending them to everyone
+            Thread(target=SendMSG, args=(connect, UserName.decode('utf-8'), style.ChoiseUserTheme(),)).start() #Thread start, responsible for reading the messages from the clients and sending them to everyone
         except socket.timeout:
             continue
 
@@ -33,10 +39,7 @@ def main():
     server_socket.listen(1)
     server_socket.settimeout(5)     #In case for connect client problem, remove this line
 
-    #Clean console:
-    sys.stdout.write('\033[2J\033[H')
-    sys.stdout.flush()
-    #++++++++++++++++++++++
+    style.CleanConsole()
     print('Server TCP on ✅')
 
     event = Event()
